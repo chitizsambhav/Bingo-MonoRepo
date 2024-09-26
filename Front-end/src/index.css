@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body{
+    background:#A6B1E1 ;
+}
+
+:root{
+    --default-font:"Inter", sans-serif;
+}
+
+/* #root{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+} */
+

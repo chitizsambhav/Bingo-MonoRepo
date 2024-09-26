@@ -1,0 +1,136 @@
+.bingo__grid-wrapper{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 550px;
+
+}
+
+
+.bingo__grid-start{
+    position: absolute;
+    align-self: center;
+}
+
+.bingo__grid-start button{
+    position: relative;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    z-index: 2;
+    border-radius: 15px;
+    padding: 15px 50px;
+    font-family: var(--default-font);
+    border: none;
+    background-color: #DCD6F7;
+    font-weight: 400;
+    font-size: 1.1rem;
+    transition:  ease-out 200ms;
+    cursor: pointer;
+}
+
+.bingo__grid-winner-h3{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--default-font);
+    z-index: 2;
+    
+    white-space: nowrap;
+}
+
+.bingo__grid-winner-h3 button{
+    margin-top: 2rem;
+    margin-right: 1rem;
+}
+
+
+.bingo__grid-start button:hover{
+    background-color: #424874;
+    color: #F4EEFF;
+    
+}
+
+
+
+.bingo__grid{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    place-content: center;
+    min-width: 400px;
+    height: 400px;
+
+   
+    }
+
+
+.bingo__grid-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.bingo__grid-loader{
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--default-font);
+
+}
+
+.bingo__grid-loader p{
+    align-self: center;
+}
+
+.bingo__currentTurn{
+    margin-top: 1.5rem;
+    margin-left: 5rem;
+    & p{
+        font-family: var(--default-font);
+        
+    }
+}
+
+.bingo__grid button {
+    height: 80px;
+    width: 80px;
+    font-family: var(--default-font);
+    font-size: medium;
+    font-weight: 400;
+    background-color: #F4EEFF;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: relative; /* Ensure buttons have their own positioning context */
+    z-index: 1; /* Keeps buttons interactive and on top */
+    }
+
+
+.bingo__grid button:hover {
+    background-color: #DCD6F7;
+    }
+    
+    /* Add rounded corners to specific buttons */
+    /* Top-left corner */
+    .bingo__grid button:nth-child(1) {
+    border-radius: 10px 0 0 0; /* Top-left */
+    }
+    
+    /* Top-right corner */
+    .bingo__grid button:nth-child(5) {
+    border-radius: 0 10px 0 0; /* Top-right */
+    }
+    
+    /* Bottom-left corner */
+    .bingo__grid button:nth-child(21) {
+    border-radius: 0 0 0 10px; /* Bottom-left */
+    }
+    
+    /* Bottom-right corner */
+    .bingo__grid button:nth-child(25) {
+    border-radius: 0 0 10px 0; /* Bottom-right */
+    }

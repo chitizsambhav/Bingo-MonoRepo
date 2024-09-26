@@ -1,0 +1,18 @@
+.vanLife__footer{
+    display: grid;
+    place-content: center;
+    background: #252525;
+    height: 15vh;
+    width: 100vw;
+    
+}
+
+.vanLife__footer h3{
+    font-family: var(--default-font);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22.92px;
+    color: #AAAAAA;
+
+
+}

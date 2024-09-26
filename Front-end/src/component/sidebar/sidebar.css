@@ -1,0 +1,48 @@
+.bingo__sidebar-container{
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
+    border-radius: 0 10px 0 0;
+    width: 15vw;
+    color: #fff;
+    justify-content: space-around;
+    background-color: #252525;
+    font-family: var(--default-font);
+}
+
+.bingo__sidebar-line{
+    width: 15vw;
+    height: 3px;
+    background-color: #fff;
+}
+
+.bingo__sidebar-players{
+    flex-grow: .5;
+    margin-left: 1.5rem;
+
+    & h3{
+        padding-bottom: 5px;
+    }
+
+    & ol {
+        list-style-type: decimal;
+        & li{
+            padding-bottom: 3px;
+            text-transform: capitalize;
+        }
+    }
+}
+
+ol li::marker {
+    content: normal;
+    color: inherit;
+    font-size: inherit;
+}
+
+.bingo__sidebar-room{
+    margin-left: 1.5rem;
+
+    & h3{
+        padding-bottom: 5px;
+    }
+}
