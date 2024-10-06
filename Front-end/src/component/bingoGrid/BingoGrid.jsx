@@ -60,7 +60,6 @@ export default function BingoGrid(){
 
     function handleRestart(){
         setWinnerName()
-        setConfettiVisible(false)
         socket.emit('restartGame')
         
     }
@@ -107,6 +106,7 @@ export default function BingoGrid(){
             setCompleted(false)
             setCompletedLines({})
             setDisableGrid(false)
+            setConfettiVisible(false)
             setGameCount((prevCount)=>prevCount+1)
             console.log(gameCount)
             setConfettiVisible(false)
