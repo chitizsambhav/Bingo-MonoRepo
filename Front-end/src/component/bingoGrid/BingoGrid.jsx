@@ -33,9 +33,8 @@ export default function BingoGrid(){
     useEffect(()=>{
             if (winnerName){
                 setConfettiVisible(true)
-                console.log(confettiVisible)
             }
-            
+            console.log(confettiVisible)
             triggerPoofOnCondition(confettiVisible)
     },[winnerName, confettiVisible])
 
@@ -60,6 +59,7 @@ export default function BingoGrid(){
     }, [completed]);
 
     function handleRestart(){
+        setWinnerName()
         socket.emit('restartGame')
         
     }
@@ -101,12 +101,12 @@ export default function BingoGrid(){
         socket.on('restartedGame',({grid, currentTurn})=>{
             console.log(grid)
             setGrid(grid)
-            setWinnerName()
             setCurrentTurn(currentTurn)
             setNumbersSelected([])
             setCompleted(false)
             setCompletedLines({})
             setDisableGrid(false)
+            setConfettiVisible(false)
             setGameCount((prevCount)=>prevCount+1)
             console.log(gameCount)
             setConfettiVisible(false)
