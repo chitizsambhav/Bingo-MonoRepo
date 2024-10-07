@@ -111,7 +111,7 @@
 
 
 .bingo__grid button:hover {
-    background-color: #DCD6F7;
+    background-color: #DCD6F7 !important;
     }
     
     /* Add rounded corners to specific buttons */

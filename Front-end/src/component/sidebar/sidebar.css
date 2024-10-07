@@ -21,13 +21,14 @@
     margin-left: 1.5rem;
 
     & h3{
-        padding-bottom: 5px;
+        padding-bottom: 20px;
     }
 
     & ol {
         list-style-type: decimal;
         & li{
             padding-bottom: 3px;
+            padding-left: 10px;
             text-transform: capitalize;
         }
     }
@@ -43,6 +44,27 @@ ol li::marker {
     margin-left: 1.5rem;
 
     & h3{
-        padding-bottom: 5px;
+        padding-bottom: 15px;
     }
+
+    & h4{
+        padding-left: 40px;
+        font-size: x-large
+
+    }
+}
+
+.player-list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.bingo__sidebar-colorSquare {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    z-index: 1;
 }

@@ -15,8 +15,16 @@ let gameState = {
   players: {},
   crossedNumbers: [],
   currentTurn: null,
+  colorCodeUsername: {},
+  colorCodePlayerID: {}
 };
+
+let playerCount = 0
 let usernameMap = {}
+let numberPlayerMap = {}
+
+const colorHexCode = ['#FADFA1','#C96868', '#FF6600', '#D2FF72', '#D3EE98', '#95E1D3','#FFB6B9', '#F38BA0', '#62D2A2', '#F7ECDE']
+
 const io = new Server(server, {
     cors: {
       origin: ["http://169.254.87.17:5173", "http://localhost:5173", "http://10.50.240.254:5173", "http://172.20.10.2:5173"]
@@ -28,10 +36,18 @@ io.on("connection",(socket)=>{
     const playerId = socket.id;
     gameState.players[playerId] = generateRandomGrid();
     
+    
     socket.on('join', ({username, room}, callback )=>{
       const { error, user }= addUser({id: socket.id, username, room})
       usernameMap[socket.id] = username
-     
+      if (playerCount>=colorHexCode.length){
+        playerCount = playerCount%colorHexCode.length
+      }
+      const usernameLowerCase = username.toLowerCase()
+      gameState.colorCodeUsername[usernameLowerCase] = colorHexCode[playerCount]
+      gameState.colorCodePlayerID[playerId] = colorHexCode[playerCount]
+      playerCount++
+
       if(error){
           return callback(error)
       }
@@ -42,7 +58,8 @@ io.on("connection",(socket)=>{
 
       io.to(user.room).emit('roomData', {
           room:user.room,
-          users:getUserInRoom({room:user.room})
+          users:getUserInRoom({room:user.room}),
+          colorCodeMap: gameState.colorCodeUsername
       })
     })
 
@@ -70,6 +87,8 @@ io.on("connection",(socket)=>{
       gameState.players={}
       gameState.crossedNumbers=[]
       gameState.currentTurn=null
+      numberPlayerMap = {}
+      
 
       const playerIds = Object.keys(usernameMap)
       playerIds.forEach((playerId)=>{
@@ -102,13 +121,16 @@ io.on("connection",(socket)=>{
 
     socket.on('startClicked',()=>{
       io.emit('removeStart')
+      io.emit('colorCode', gameState.colorCodePlayerID)
     })
 
-    socket.on('numberSelected', (number) => {
+    socket.on('numberSelected', (number, currentTurn) => {
       console.log(number)
       console.log(socket.id, gameState.currentTurn)
       console.log(usernameMap)
       if (socket.id === gameState.currentTurn) {
+          numberPlayerMap[number] = currentTurn
+          io.emit('updateNumberPlayerMap', numberPlayerMap)
           gameState.crossedNumbers.push(number);
           console.log(number)
           console.log(gameState.crossedNumbers)
@@ -125,17 +147,20 @@ io.on("connection",(socket)=>{
 
     socket.on('disconnect', ()=>{
       const removedUser = removeUser({id:socket.id})
+      delete gameState.colorCodeUsername[usernameMap[playerId]]
       if (removedUser){
           io.to(removedUser.room).emit('message', generateMessage( `${removedUser.username} has left the live chat!`,'Admin'))
           io.to(removedUser.room).emit('roomData', {
               room:removedUser.room,
-              users:getUserInRoom({room:removedUser.room})
+              users:getUserInRoom({room:removedUser.room}),
+              colorCodeMap:gameState.colorCodeUsername
           })
       }
       let currentIndex = Object.keys(gameState.players).indexOf(playerId)
       console.log(gameState.players[playerId])
       console.log(currentIndex)
       delete gameState.players[playerId];
+      delete gameState.colorCodePlayerID[playerId]
       delete usernameMap[playerId]
       const playerIds = Object.keys(gameState.players);
       if(playerIds.length===0){
@@ -168,6 +193,8 @@ function generateRandomGrid() {
   numbers = shuffle(numbers); // Implement a shuffle function
   return chunk(numbers, 5);   // Split array into 5x5 chunks
 }
+
+
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
