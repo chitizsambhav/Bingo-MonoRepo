@@ -27,7 +27,7 @@ const colorHexCode = ['#FADFA1','#C96868', '#FF6600', '#D2FF72', '#D3EE98', '#95
 
 const io = new Server(server, {
     cors: {
-      origin: ["http://169.254.87.17:5173", "http://localhost:5173", "http://10.50.240.254:5173", "http://172.20.10.2:5173", "http://3.25.129.79"]
+      origin: ["http://169.254.87.17:5173", "http://localhost:5173", "http://10.50.240.254:5173", "http://172.20.10.2:5173", "http://3.25.105.209"]
     }
   });
 
